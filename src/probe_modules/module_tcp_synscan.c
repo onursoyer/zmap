@@ -134,7 +134,8 @@ void synscan_process_packet(const u_char *packet,
     // [MOBI]
     fs_add_uint64(fs, "th_off", tcp->th_off);
 
-    char *option = (char *) (tcp + sizeof(struct tcphdr));
+//    char *option = (char *) (tcp + sizeof(struct tcphdr));
+    char *option = (char *) tcp + tcp->th_off;
     char option_kind = option[0];
 
     char option_length = option[1];
