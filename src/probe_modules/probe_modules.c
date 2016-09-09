@@ -103,7 +103,7 @@ void fs_add_system_fields(fieldset_t *fs, int is_repeat, int in_cooldown) {
     fs_add_uint64(fs, "timestamp_us", (uint64_t) t.tv_usec);
 }
 
-int ip_fields_len = 12;
+int ip_fields_len = 14;
 fielddef_t ip_fields[] = {
         {.name="saddr", .type="string", .desc="source IP address of response"},
         {.name="saddr_raw", .type="int", .desc="network order integer form of source IP address"},
