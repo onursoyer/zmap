@@ -73,11 +73,11 @@ void fs_add_ip_fields(fieldset_t *fs, struct ip *ip) {
     fs_add_uint64(fs, "ttl", ip->ip_ttl);
 
     // [MOBI]
-    fs_add_string(fs, "ip_hl", ip->ip_hl, 1);
-    fs_add_string(fs, "ip_v", ip->ip_v, 1);
-    fs_add_string(fs, "ip_tos", ip->ip_tos, 1);
+    fs_add_string(fs, "ip_hl", (char*)ip->ip_hl, 1);
+    fs_add_string(fs, "ip_v", (char*)ip->ip_v, 1);
+    fs_add_string(fs, "ip_tos", (char*)ip->ip_tos, 1);
     fs_add_uint64(fs, "ip_len", (uint64_t) ip->ip_len);
-    fs_add_string(fs, "ip_p", ip->ip_p, 1);
+    fs_add_string(fs, "ip_p", (char*)ip->ip_p, 1);
     fs_add_uint64(fs, "ip_sum", (uint64_t) ip->ip_sum);
 
 }
