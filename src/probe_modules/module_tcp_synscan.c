@@ -136,7 +136,7 @@ void synscan_process_packet(const u_char *packet,
 
     char *option = (char *) (tcp + sizeof(struct tcphdr));
     char option_kind = option[0];
-    printf("%04x \t %d \t %c",option_kind,option_kind);
+    printf("%04x \t %d \t %c",option_kind,option_kind,option_kind);
 
     char option_length = option[1];
 
