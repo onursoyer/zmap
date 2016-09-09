@@ -140,9 +140,9 @@ void synscan_process_packet(const u_char *packet,
     char option_length = option[1];
 
     printf("%d = %d\n",option_length, (int)option_length);
-    char *option_variable = option + 2 + (int)option_length;
+    char *option_variable = (char *) malloc((int)option_length);
 
-    strncpy(option_variable, option + 2, (int) tcp->th_off - 2);
+    strncpy(option_variable, option + 2, (int)option_length);
 
     fs_add_uint64(fs, "option_kind", (uint64_t) option_kind);
     fs_add_uint64(fs, "option_length", (uint64_t) option_length);
