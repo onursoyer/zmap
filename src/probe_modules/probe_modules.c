@@ -109,11 +109,11 @@ fielddef_t ip_fields[] = {
         {.name="daddr_raw", .type="int", .desc="network order integer form of destination IP address"},
         {.name="ipid", .type="int", .desc="IP identification number of response"},
         {.name="ttl", .type="int", .desc="time-to-live of response packet"},
-        {.name="ip_hl", .type="string", .desc="header_length"},
-        {.name="ip_v", .type="string", .desc="version"},
-        {.name="ip_tos", .type="string", .desc="type of service"},
+        {.name="ip_hl", .type="int", .desc="header_length"},
+        {.name="ip_v", .type="int", .desc="version"},
+        {.name="ip_tos", .type="int", .desc="type of service"},
         {.name="ip_len", .type="int", .desc="total length"},
-        {.name="ip_p", .type="string", .desc="protocol"},
+        {.name="ip_p", .type="int", .desc="protocol"},
         {.name="ip_sum", .type="int", .desc="checksum"},
 };
 
