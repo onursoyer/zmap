@@ -76,9 +76,9 @@ void fs_add_ip_fields(fieldset_t *fs, struct ip *ip) {
     fs_add_string(fs, "header_length", make_ip_str(ip->ip_hl), 1);
     fs_add_string(fs, "ip_v", make_ip_str(ip->ip_v), 1), 1;
     fs_add_string(fs, "ip_tos", make_ip_str(ip->ip_tos), 1);
-    fs_add_string(fs, "ip_len", make_ip_str(ip->ip_len), 1);
+    fs_add_uint64(fs, "ip_len", (uint64_t) ip->ip_len);
     fs_add_string(fs, "ip_p", make_ip_str(ip->ip_p), 1);
-    fs_add_string(fs, "ip_sum", make_ip_str(ip->ip_sum), 1);
+    fs_add_uint64(fs, "ip_sum", (uint64_t) ip->ip_sum);
 }
 
 #define TIMESTR_LEN 55
@@ -102,7 +102,7 @@ void fs_add_system_fields(fieldset_t *fs, int is_repeat, int in_cooldown) {
     // [MOBI]
 }
 
-int ip_fields_len = 11;
+int ip_fields_len = 12;
 fielddef_t ip_fields[] = {
         {.name="saddr", .type="string", .desc="source IP address of response"},
         {.name="saddr_raw", .type="int", .desc="network order integer form of source IP address"},
@@ -113,9 +113,9 @@ fielddef_t ip_fields[] = {
         {.name="header_length", .type="string", .desc="header_length"},
         {.name="ip_v", .type="string", .desc="version"},
         {.name="ip_tos", .type="string", .desc="type of service"},
-        {.name="ip_len", .type="string", .desc="total length"},
+        {.name="ip_len", .type="int", .desc="total length"},
         {.name="ip_p", .type="string", .desc="protocol"},
-        {.name="ip_sum", .type="string", .desc="checksum"}
+        {.name="ip_sum", .type="int", .desc="checksum"}
 };
 
 int sys_fields_len = 5;
