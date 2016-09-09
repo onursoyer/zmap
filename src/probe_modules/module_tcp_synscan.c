@@ -163,14 +163,14 @@ static fielddef_t fields[] = {
         {.name = "seqnum", .type = "int", .desc = "TCP sequence number"},
         {.name = "acknum", .type = "int", .desc = "TCP acknowledgement number"},
         {.name = "window", .type = "int", .desc = "TCP window"},
-        {.name = "classification", .type="string", .desc = "packet classification"},
-        {.name = "success", .type="bool", .desc = "is response considered success"},
         {.name = "tcp_packet_size1", .type="int", .desc = "tcp_packet_size1"},
         {.name = "tcp_packet_size2", .type="int", .desc = "tcp_packet_size2"},
         {.name = "th_off", .type="string", .desc = "th_off"},
         {.name = "option_kind", .type="int", .desc = "option_kind"},
         {.name = "option_length", .type="int", .desc = "option_length"},
-        {.name = "option_variable", .type="int", .desc = "option_variable"}
+        {.name = "option_variable", .type="int", .desc = "option_variable"},
+        {.name = "classification", .type="string", .desc = "packet classification"},
+        {.name = "success", .type="bool", .desc = "is response considered success"}
 };
 
 probe_module_t module_tcp_synscan = {
