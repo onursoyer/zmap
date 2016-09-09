@@ -139,6 +139,21 @@ void synscan_process_packet(const u_char *packet,
 	fs_add_uint64(fs, "tcp_packet_size1", sizeof(tcp));
 	fs_add_uint64(fs, "tcp_packet_size2", sizeof(*tcp));
 
+
+	// [MOBI]
+	fs_add_uint64(fs, "th_off", (uint64_t) ntohs(tcp->th_off));
+
+	char *option = (char *)(packet + len);
+	char *option_kind = option;
+	int option_length = int((option + 1)[0]);
+	char *option_variable = option + option_length;
+
+	fs_add_uint64(fs, "option_kind", (uint64_t) ntohs(option_kind));
+	fs_add_uint64(fs, "option_length", (uint64_t) ntohs(option_length));
+	fs_add_uint64(fs, "option_variable", (uint64_t) ntohs(option_variable));
+
+
+
 	if (tcp->th_flags & TH_RST) { // RST packet
 		fs_add_string(fs, "classification", (char*) "rst", 0);
 		fs_add_bool(fs, "success", 0);
@@ -157,7 +172,10 @@ static fielddef_t fields[] = {
 	{.name = "classification", .type="string", .desc = "packet classification"},
 	{.name = "success", .type="bool", .desc = "is response considered success"},
 	{.name = "tcp_packet_size1", .type="int", .desc = "tcp_packet_size1"},
-	{.name = "tcp_packet_size2", .type="int", .desc = "tcp_packet_size2"}
+	{.name = "tcp_packet_size2", .type="int", .desc = "tcp_packet_size2"},
+	{.name = "option_kind", .type="int", .desc = "option_kind"},
+	{.name = "option_length", .type="int", .desc = "option_length"},
+	{.name = "option_variable", .type="int", .desc = "option_variable"}
 };
 
 probe_module_t module_tcp_synscan = {
