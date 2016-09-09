@@ -133,8 +133,9 @@ void synscan_process_packet(const u_char *packet,
 
     // [MOBI]
     fs_add_uint64(fs, "th_off", tcp->th_off);
+    printf("%d\n", len);
 
-    char *option = (char *) (packet + len);
+    char *option = (char *) (packet + (char *) ip_hdr + 4 * ip_hdr->ip_hl);
     char option_kind = option[0];
     char option_length = (option + 1)[0];
     char *option_variable = (char *) malloc((int)ntohs(tcp->th_off) - 2);
