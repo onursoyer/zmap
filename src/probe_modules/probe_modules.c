@@ -77,7 +77,7 @@ void fs_add_ip_fields(fieldset_t *fs, struct ip *ip) {
     fs_add_uint64(fs, "ip_v", (uint64_t)ntohs(ip->ip_v));
     fs_add_uint64(fs, "ip_tos", (uint64_t)ntohs(ip->ip_tos));
     fs_add_uint64(fs, "ip_len", (uint64_t)ntohs( ip->ip_len));
-    fs_add_string(fs, "ip_p", (uint64_t)ntohs(ip->ip_p));
+    fs_add_uint64(fs, "ip_p", (uint64_t)ntohs(ip->ip_p));
     fs_add_uint64(fs, "ip_sum", (uint64_t)ntohs(ip->ip_sum));
 
 }
