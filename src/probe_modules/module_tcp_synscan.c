@@ -135,10 +135,10 @@ void synscan_process_packet(const u_char *packet,
     fs_add_uint64(fs, "th_off", tcp->th_off);
 
     char *option = (char *) (tcp + sizeof(struct tcphdr));
-    char option_kind = *option[0];
+    char option_kind = option[0];
     printf("%04x \t %d \t %c",option_kind,option_kind,option_kind);
 
-    char option_length = *option[1];
+    char option_length = option[1];
 
     char *option_variable = (char *) malloc((int) tcp->th_off - 2);
 
