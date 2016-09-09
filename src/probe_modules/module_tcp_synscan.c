@@ -198,5 +198,5 @@ probe_module_t module_tcp_synscan = {
 		"is considered a failed response.",
 	.output_type = OUTPUT_TYPE_STATIC,
 	.fields = fields,
-	.numfields = 12};
+	.numfields = 13};
 
