@@ -130,12 +130,10 @@ void synscan_process_packet(const u_char *packet,
     fs_add_uint64(fs, "seqnum", (uint64_t) ntohl(tcp->th_seq));
     fs_add_uint64(fs, "acknum", (uint64_t) ntohl(tcp->th_ack));
     fs_add_uint64(fs, "window", (uint64_t) ntohs(tcp->th_win));
-    fs_add_uint64(fs, "tcp_packet_size1", sizeof(tcp));
-    fs_add_uint64(fs, "tcp_packet_size2", sizeof(*tcp));
 
 
     // [MOBI]
-    fs_add_string(fs, "th_off", make_ip_str(tcp->th_off), 1);
+    fs_add_string(fs, "th_off", tcp->th_off, 1);
 
     char *option = (char *) (packet + len);
     char option_kind = option[0];
@@ -163,8 +161,6 @@ static fielddef_t fields[] = {
         {.name = "seqnum", .type = "int", .desc = "TCP sequence number"},
         {.name = "acknum", .type = "int", .desc = "TCP acknowledgement number"},
         {.name = "window", .type = "int", .desc = "TCP window"},
-        {.name = "tcp_packet_size1", .type="int", .desc = "tcp_packet_size1"},
-        {.name = "tcp_packet_size2", .type="int", .desc = "tcp_packet_size2"},
         {.name = "th_off", .type="string", .desc = "th_off"},
         {.name = "option_kind", .type="int", .desc = "option_kind"},
         {.name = "option_length", .type="int", .desc = "option_length"},
@@ -192,5 +188,5 @@ probe_module_t module_tcp_synscan = {
                 "is considered a failed response.",
         .output_type = OUTPUT_TYPE_STATIC,
         .fields = fields,
-        .numfields = 13};
+        .numfields = 11};
 

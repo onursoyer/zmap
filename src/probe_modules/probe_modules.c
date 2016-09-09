@@ -73,14 +73,12 @@ void fs_add_ip_fields(fieldset_t *fs, struct ip *ip) {
     fs_add_uint64(fs, "ttl", ip->ip_ttl);
 
     // [MOBI]
-    fs_add_string(fs, "ip_hl", make_ip_str(ip->ip_hl), 1);
-    fs_add_string(fs, "ip_v", make_ip_str(ip->ip_v), 1), 1;
-    fs_add_string(fs, "ip_tos", make_ip_str(ip->ip_tos), 1);
+    fs_add_string(fs, "ip_hl", ip->ip_hl, 1);
+    fs_add_string(fs, "ip_v", ip->ip_v, 1);
+    fs_add_string(fs, "ip_tos", ip->ip_tos, 1);
     fs_add_uint64(fs, "ip_len", (uint64_t) ip->ip_len);
-    fs_add_string(fs, "ip_p", make_ip_str(ip->ip_p), 1);
+    fs_add_string(fs, "ip_p", ip->ip_p, 1);
     fs_add_uint64(fs, "ip_sum", (uint64_t) ip->ip_sum);
-    fs_add_uint64(fs, "ip_packet_size1", sizeof(ip));
-    fs_add_uint64(fs, "ip_packet_size2", sizeof(*ip));
 
 }
 
@@ -117,8 +115,6 @@ fielddef_t ip_fields[] = {
         {.name="ip_len", .type="int", .desc="total length"},
         {.name="ip_p", .type="string", .desc="protocol"},
         {.name="ip_sum", .type="int", .desc="checksum"},
-        {.name="ip_packet_size1", .type="int", .desc="ip_packet_size1"},
-        {.name="ip_packet_size2", .type="int", .desc="ip_packet_size2"}
 };
 
 int sys_fields_len = 5;
