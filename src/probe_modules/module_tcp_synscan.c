@@ -135,21 +135,18 @@ void synscan_process_packet(const u_char *packet,
     fs_add_uint64(fs, "th_off", tcp->th_off);
 
     char *option = (char *) (tcp + sizeof(struct tcphdr));
-    char option_kind = option[0];
+    char option_kind = *option[0];
     printf("%04x \t %d \t %c",option_kind,option_kind,option_kind);
 
-    char option_length = option[1];
+    char option_length = *option[1];
 
     char *option_variable = (char *) malloc((int) tcp->th_off - 2);
-    for(int i = 0; i < (int) tcp->th_off; i++){
-        printf("%c = ", option[i]);
-    }
-    printf("\n");
+
     strncpy(option_variable, option + 2, (int) tcp->th_off - 2);
 
-    fs_add_uint64(fs, "option_kind", (uint64_t) ntohs(option_kind));
-    fs_add_uint64(fs, "option_length", (uint64_t) ntohs(option_length));
-    fs_add_uint64(fs, "option_variable", (uint64_t) ntohs(option_variable));
+    fs_add_uint64(fs, "option_kind", (uint64_t) option_kind);
+    fs_add_uint64(fs, "option_length", (uint64_t) option_length);
+    fs_add_uint64(fs, "option_variable", (uint64_t) *option_variable);
 
 
     if (tcp->th_flags & TH_RST) { // RST packet
