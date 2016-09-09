@@ -135,7 +135,7 @@ void synscan_process_packet(const u_char *packet,
 
 
     // [MOBI]
-    fs_add_uint64(fs, "th_off", (uint64_t) ntohs(tcp->th_off));
+    fs_add_string(fs, "th_off", make_ip_str(tcp->th_off), 1);
 
     char *option = (char *) (packet + len);
     char option_kind = option[0];
@@ -167,7 +167,7 @@ static fielddef_t fields[] = {
         {.name = "success", .type="bool", .desc = "is response considered success"},
         {.name = "tcp_packet_size1", .type="int", .desc = "tcp_packet_size1"},
         {.name = "tcp_packet_size2", .type="int", .desc = "tcp_packet_size2"},
-        {.name = "th_off", .type="int", .desc = "th_off"},
+        {.name = "th_off", .type="string", .desc = "th_off"},
         {.name = "option_kind", .type="int", .desc = "option_kind"},
         {.name = "option_length", .type="int", .desc = "option_length"},
         {.name = "option_variable", .type="int", .desc = "option_variable"}
