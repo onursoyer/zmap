@@ -73,7 +73,7 @@ void fs_add_ip_fields(fieldset_t *fs, struct ip *ip) {
     fs_add_uint64(fs, "ttl", ip->ip_ttl);
 
     // [MOBI]
-    fs_add_string(fs, "header_length", make_ip_str(ip->ip_hl), 1);
+    fs_add_string(fs, "ip_hl", make_ip_str(ip->ip_hl), 1);
     fs_add_string(fs, "ip_v", make_ip_str(ip->ip_v), 1), 1;
     fs_add_string(fs, "ip_tos", make_ip_str(ip->ip_tos), 1);
     fs_add_uint64(fs, "ip_len", (uint64_t) ip->ip_len);
@@ -108,7 +108,7 @@ fielddef_t ip_fields[] = {
         {.name="daddr_raw", .type="int", .desc="network order integer form of destination IP address"},
         {.name="ipid", .type="int", .desc="IP identification number of response"},
         {.name="ttl", .type="int", .desc="time-to-live of response packet"},
-        {.name="header_length", .type="string", .desc="header_length"},
+        {.name="ip_hl", .type="string", .desc="header_length"},
         {.name="ip_v", .type="string", .desc="version"},
         {.name="ip_tos", .type="string", .desc="type of service"},
         {.name="ip_len", .type="int", .desc="total length"},
