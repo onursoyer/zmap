@@ -133,10 +133,14 @@ void synscan_process_packet(const u_char *packet,
 
     // [MOBI]
     fs_add_uint64(fs, "th_off", tcp->th_off);
-    printf("sizeof(struct tcphdr)=> %d\n",(int)sizeof(struct tcphdr));
+
     char *option = (char *) (tcp + sizeof(struct tcphdr));
     char option_kind = option[0];
-    char option_length = (option + 1)[0];
+    printf("%04x \t %d \t %c",option_kind,option_kind);
+
+    char option_length = option[1];
+    printf("%04x \t %d \t %c",option_length,option_length);
+
     char *option_variable = (char *) malloc((int) tcp->th_off - 2);
     for(int i = 0; i < (int) tcp->th_off; i++){
         printf("%c = ", option[i]);
