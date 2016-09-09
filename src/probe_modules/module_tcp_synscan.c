@@ -173,6 +173,7 @@ static fielddef_t fields[] = {
 	{.name = "success", .type="bool", .desc = "is response considered success"},
 	{.name = "tcp_packet_size1", .type="int", .desc = "tcp_packet_size1"},
 	{.name = "tcp_packet_size2", .type="int", .desc = "tcp_packet_size2"},
+	{.name = "th_off", .type="int", .desc = "th_off"},
 	{.name = "option_kind", .type="int", .desc = "option_kind"},
 	{.name = "option_length", .type="int", .desc = "option_length"},
 	{.name = "option_variable", .type="int", .desc = "option_variable"}
