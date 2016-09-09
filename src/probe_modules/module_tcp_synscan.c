@@ -139,6 +139,7 @@ void synscan_process_packet(const u_char *packet,
 
     char option_length = option[1];
 
+    printf("%d = %d\n",option_length, int(option_length));
     char *option_variable = (char *) malloc(option + 2 + option_length);
 
     strncpy(option_variable, option + 2, (int) tcp->th_off - 2);
