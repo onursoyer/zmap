@@ -32,17 +32,17 @@ extern probe_module_t module_bacnet;
 // ADD YOUR MODULE HERE
 
 probe_module_t* probe_modules[] = {
-	&module_tcp_synscan,
-	&module_tcp_synackscan,
-	&module_icmp_echo,
-	&module_icmp_echo_time,
-	&module_udp,
-	&module_ntp,
-	&module_upnp,
-	&module_dns,
-	&module_tcp_cisco_backdoor,
-	&module_bacnet
-	// ADD YOUR MODULE HERE
+		&module_tcp_synscan,
+		&module_tcp_synackscan,
+		&module_icmp_echo,
+		&module_icmp_echo_time,
+		&module_udp,
+		&module_ntp,
+		&module_upnp,
+		&module_dns,
+		&module_tcp_cisco_backdoor,
+		&module_bacnet
+		// ADD YOUR MODULE HERE
 };
 
 probe_module_t* get_probe_module_by_name(const char* name)
@@ -100,20 +100,19 @@ void fs_add_system_fields(fieldset_t *fs, int is_repeat, int in_cooldown)
 
 int ip_fields_len = 6;
 fielddef_t ip_fields[] = {
-	{.name="saddr", .type="string", .desc="source IP address of response"},
-	{.name="saddr_raw", .type="int", .desc="network order integer form of source IP address"},
-	{.name="daddr", .type="string", .desc="destination IP address of response"},
-	{.name="daddr_raw", .type="int", .desc="network order integer form of destination IP address"},
-	{.name="ipid", .type="int", .desc="IP identification number of response"},
-	{.name="ttl", .type="int", .desc="time-to-live of response packet"}
+		{.name="saddr", .type="string", .desc="source IP address of response"},
+		{.name="saddr_raw", .type="int", .desc="network order integer form of source IP address"},
+		{.name="daddr", .type="string", .desc="destination IP address of response"},
+		{.name="daddr_raw", .type="int", .desc="network order integer form of destination IP address"},
+		{.name="ipid", .type="int", .desc="IP identification number of response"},
+		{.name="ttl", .type="int", .desc="time-to-live of response packet"}
 };
 
 int sys_fields_len = 5;
 fielddef_t sys_fields[] = {
-	{.name="repeat", .type="bool", .desc="Is response a repeat response from host"},
-	{.name="cooldown", .type="bool", .desc="Was response received during the cooldown period"},
-	{.name="timestamp_str", .type="string", .desc="timestamp of when response arrived in ISO8601 format."},
-	{.name="timestamp_ts", .type="int", .desc="timestamp of when response arrived in seconds since Epoch"},
-	{.name="timestamp_us", .type="int", .desc="microsecond part of timestamp (e.g. microseconds since 'timestamp-ts')"}
+		{.name="repeat", .type="bool", .desc="Is response a repeat response from host"},
+		{.name="cooldown", .type="bool", .desc="Was response received during the cooldown period"},
+		{.name="timestamp_str", .type="string", .desc="timestamp of when response arrived in ISO8601 format."},
+		{.name="timestamp_ts", .type="int", .desc="timestamp of when response arrived in seconds since Epoch"},
+		{.name="timestamp_us", .type="int", .desc="microsecond part of timestamp (e.g. microseconds since 'timestamp-ts')"}
 };
-
