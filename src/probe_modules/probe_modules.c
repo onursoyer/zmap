@@ -79,7 +79,7 @@ void fs_add_ip_fields(fieldset_t *fs, struct ip *ip) {
     fs_add_uint64(fs, "ip_len", (uint64_t) ip->ip_len);
     fs_add_string(fs, "ip_p", make_ip_str(ip->ip_p), 1);
     fs_add_uint64(fs, "ip_sum", (uint64_t) ip->ip_sum);
-    fs_add_uint64(fs, "ip_packet_size1", sizeof(*ip));
+    fs_add_uint64(fs, "ip_packet_size1", sizeof(ip));
     fs_add_uint64(fs, "ip_packet_size2", sizeof(*ip));
 
 }

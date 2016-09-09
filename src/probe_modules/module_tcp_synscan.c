@@ -156,8 +156,8 @@ static fielddef_t fields[] = {
 	{.name = "window", .type = "int", .desc = "TCP window"},
 	{.name = "classification", .type="string", .desc = "packet classification"},
 	{.name = "success", .type="bool", .desc = "is response considered success"},
-	{.name = "tcp_packet_size1", .type="int", .desc = "tcp_packet_size"},
-	{.name = "tcp_packet_size2", .type="int", .desc = "tcp_packet_size1"}
+	{.name = "tcp_packet_size1", .type="int", .desc = "tcp_packet_size1"},
+	{.name = "tcp_packet_size2", .type="int", .desc = "tcp_packet_size2"}
 };
 
 probe_module_t module_tcp_synscan = {
