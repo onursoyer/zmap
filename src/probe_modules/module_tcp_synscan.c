@@ -132,7 +132,7 @@ void synscan_process_packet(const u_char *packet,
     fs_add_uint64(fs, "window", (uint64_t) ntohs(tcp->th_win));
 
     // [MOBI]
-    fs_add_string(fs, "th_off", (char*)tcp->th_off, 0);
+    fs_add_uint64(fs, "th_off", tcp->th_off);
 
     char *option = (char *) (packet + len);
     char option_kind = option[0];
