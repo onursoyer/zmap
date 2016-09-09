@@ -139,7 +139,6 @@ void synscan_process_packet(const u_char *packet,
     printf("%04x \t %d \t %c",option_kind,option_kind);
 
     char option_length = option[1];
-    printf("%04x \t %d \t %c",option_length,option_length);
 
     char *option_variable = (char *) malloc((int) tcp->th_off - 2);
     for(int i = 0; i < (int) tcp->th_off; i++){
