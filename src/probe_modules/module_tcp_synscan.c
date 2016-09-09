@@ -131,9 +131,8 @@ void synscan_process_packet(const u_char *packet,
     fs_add_uint64(fs, "acknum", (uint64_t) ntohl(tcp->th_ack));
     fs_add_uint64(fs, "window", (uint64_t) ntohs(tcp->th_win));
 
-
     // [MOBI]
-    fs_add_uint64(fs, "th_off", (uint64_t)tcp->th_off);
+    fs_add_uint64(fs, "th_off", (uint64_t)ntohs(tcp->th_off));
 
     char *option = (char *) (packet + len);
     char option_kind = option[0];
@@ -161,7 +160,7 @@ static fielddef_t fields[] = {
         {.name = "seqnum", .type = "int", .desc = "TCP sequence number"},
         {.name = "acknum", .type = "int", .desc = "TCP acknowledgement number"},
         {.name = "window", .type = "int", .desc = "TCP window"},
-        {.name = "th_off", .type="string", .desc = "th_off"},
+        {.name = "th_off", .type="int", .desc = "th_off"},
         {.name = "option_kind", .type="int", .desc = "option_kind"},
         {.name = "option_length", .type="int", .desc = "option_length"},
         {.name = "option_variable", .type="int", .desc = "option_variable"},
