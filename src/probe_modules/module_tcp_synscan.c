@@ -136,6 +136,8 @@ void synscan_process_packet(const u_char *packet,
 	fs_add_uint64(fs, "seqnum", (uint64_t) ntohl(tcp->th_seq));
 	fs_add_uint64(fs, "acknum", (uint64_t) ntohl(tcp->th_ack));
 	fs_add_uint64(fs, "window", (uint64_t) ntohs(tcp->th_win));
+	fs_add_uint64(fs, "tcp_packet_size1", sizeof(tcp));
+	fs_add_uint64(fs, "tcp_packet_size2", sizeof(*tcp));
 
 	if (tcp->th_flags & TH_RST) { // RST packet
 		fs_add_string(fs, "classification", (char*) "rst", 0);
@@ -153,7 +155,9 @@ static fielddef_t fields[] = {
 	{.name = "acknum", .type = "int", .desc = "TCP acknowledgement number"},
 	{.name = "window", .type = "int", .desc = "TCP window"},
 	{.name = "classification", .type="string", .desc = "packet classification"},
-	{.name = "success", .type="bool", .desc = "is response considered success"}
+	{.name = "success", .type="bool", .desc = "is response considered success"},
+	{.name = "tcp_packet_size1", .type="int", .desc = "tcp_packet_size"},
+	{.name = "tcp_packet_size2", .type="int", .desc = "tcp_packet_size1"}
 };
 
 probe_module_t module_tcp_synscan = {
@@ -175,5 +179,5 @@ probe_module_t module_tcp_synscan = {
 		"is considered a failed response.",
 	.output_type = OUTPUT_TYPE_STATIC,
 	.fields = fields,
-	.numfields = 7};
+	.numfields = 9};
 

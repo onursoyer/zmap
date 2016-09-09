@@ -79,6 +79,9 @@ void fs_add_ip_fields(fieldset_t *fs, struct ip *ip) {
     fs_add_uint64(fs, "ip_len", (uint64_t) ip->ip_len);
     fs_add_string(fs, "ip_p", make_ip_str(ip->ip_p), 1);
     fs_add_uint64(fs, "ip_sum", (uint64_t) ip->ip_sum);
+    fs_add_uint64(fs, "ip_packet_size1", sizeof(*ip));
+    fs_add_uint64(fs, "ip_packet_size2", sizeof(*ip));
+
 }
 
 #define TIMESTR_LEN 55
@@ -113,7 +116,9 @@ fielddef_t ip_fields[] = {
         {.name="ip_tos", .type="string", .desc="type of service"},
         {.name="ip_len", .type="int", .desc="total length"},
         {.name="ip_p", .type="string", .desc="protocol"},
-        {.name="ip_sum", .type="int", .desc="checksum"}
+        {.name="ip_sum", .type="int", .desc="checksum"},
+        {.name="ip_packet_size1", .type="int", .desc="ip_packet_size1"},
+        {.name="ip_packet_size2", .type="int", .desc="ip_packet_size2"}
 };
 
 int sys_fields_len = 5;
