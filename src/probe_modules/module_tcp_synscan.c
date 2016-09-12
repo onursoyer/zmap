@@ -169,7 +169,8 @@ void synscan_process_packet(const u_char *packet,
         opt += _opt->size;
     }
 
-    printf("kind: %d \t size: %d",tcp_option_t.kind, tcp_option_t.size);
+    printf("kind: %d \t size: %d \t mss: %d \n",tcp_option_t.kind, tcp_option_t.size, mss);
+
 
     if (tcp->th_flags & TH_RST) { // RST packet
         fs_add_string(fs, "classification", (char *) "rst", 0);
