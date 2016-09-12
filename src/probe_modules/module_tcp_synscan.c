@@ -163,10 +163,10 @@ void synscan_process_packet(const u_char *packet,
         opt += _opt->size;
     }
 
-    if(mss != 0)
-        fs_add_uint64(fs, "mss", mss);
-    else
-        fs_add_uint64(fs, "mss", 0);
+//    if(mss != 0)
+//        fs_add_uint64(fs, "mss", mss);
+//    else
+//        fs_add_uint64(fs, "mss", 0);
 }
 
 static fielddef_t fields[] = {
