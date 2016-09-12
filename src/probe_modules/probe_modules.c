@@ -60,14 +60,6 @@ void print_probe_modules(void) {
     }
 }
 
-// [MOBI]
-typedef struct {
-    char copied;
-    char option_class[2];
-    char option_number[5];
-    uint8_t option_length;
-} ip_options;
-
 void fs_add_ip_fields(fieldset_t *fs, struct ip *ip) {
     // WARNING: you must update fs_ip_fields_len  as well
     // as the definitions set (ip_fiels) if you
@@ -86,15 +78,6 @@ void fs_add_ip_fields(fieldset_t *fs, struct ip *ip) {
     fs_add_uint64(fs, "ip_len", ip->ip_len);
     fs_add_uint64(fs, "ip_p", ip->ip_p);
     fs_add_uint64(fs, "ip_sum", ip->ip_sum);
-
-    if ((int) ip->ip_hl > 5) {
-        uint16_t *opt = (uint16_t * )(ip + sizeof(struct ip));
-        ip_options *_opt = (ip_options *) opt;
-        printf("copied: %c \t class: %s \t number: %s \n  length: %d\n", _opt->copied, _opt->option_class,
-               _opt->option_number, _opt->option_length);
-    }
-
-
 }
 
 #define TIMESTR_LEN 55
