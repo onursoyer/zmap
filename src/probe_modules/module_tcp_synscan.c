@@ -163,7 +163,7 @@ void synscan_process_packet(const u_char *packet,
             ++opt;  // NOP is one byte;
             continue;
         }
-        printf("_opt->kind: %d\n", _opt->kind);
+        printf("[START] _opt->kind: %d\n", _opt->kind);
         if( _opt->kind == 2 /* MSS */ ) {
             mss = ntohs((uint16_t)*(opt + sizeof(opt)));
             printf("mss: %d \n", mss);
@@ -171,6 +171,7 @@ void synscan_process_packet(const u_char *packet,
         opt += _opt->size;
     }
 
+    printf("[END] _opt->kind: %d\n", _opt->kind);
 
 
 
