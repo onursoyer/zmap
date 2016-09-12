@@ -118,11 +118,11 @@ int synscan_validate_packet(const struct ip *ip_hdr, uint32_t len,
     return 1;
 }
 
-//// [MOBI]
-//typedef struct {
-//    uint8_t kind;
-//    uint8_t size;
-//} tcp_option_t;
+// [MOBI]
+typedef struct {
+    uint8_t kind;
+    uint8_t size;
+} tcp_option_t;
 
 void synscan_process_packet(const u_char *packet,
                             __attribute__((unused)) uint32_t len, fieldset_t *fs,
@@ -146,27 +146,27 @@ void synscan_process_packet(const u_char *packet,
     }
 
 
-//
-//    // [MOBI]
-//    // MSS Parsing
-//    uint16_t mss = 0;
-//    uint8_t* opt = (uint8_t*) (packet + 4 * ip_hdr->ip_hl + sizeof(struct ether_header) + sizeof(struct tcphdr));
-//    while( *opt != 0 ) {
-//        tcp_option_t* _opt = (tcp_option_t*)opt;
-//        if( _opt->kind == 1 /* NOP */ ) {
-//            ++opt;  // NOP is one byte;
-//            continue;
-//        }
-//        if( _opt->kind == 2 /* MSS */ ) {
-//            mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
-//        }
-//        opt += _opt->size;
-//    }
-//
-//    if(mss != 0)
-//        fs_add_uint64(fs, "mss", mss);
-//    else
-//        fs_add_uint64(fs, "mss", 0);
+
+    // [MOBI]
+    // MSS Parsing
+    uint16_t mss = 0;
+    uint8_t* opt = (uint8_t*) (packet + 4 * ip_hdr->ip_hl + sizeof(struct ether_header) + sizeof(struct tcphdr));
+    while( *opt != 0 ) {
+        tcp_option_t* _opt = (tcp_option_t*)opt;
+        if( _opt->kind == 1 /* NOP */ ) {
+            ++opt;  // NOP is one byte;
+            continue;
+        }
+        if( _opt->kind == 2 /* MSS */ ) {
+            mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
+        }
+        opt += _opt->size;
+    }
+
+    if(mss != 0)
+        fs_add_uint64(fs, "mss", mss);
+    else
+        fs_add_uint64(fs, "mss", 0);
 }
 
 static fielddef_t fields[] = {
