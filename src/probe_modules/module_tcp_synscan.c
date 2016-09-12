@@ -155,13 +155,13 @@ void synscan_process_packet(const u_char *packet,
 //    fs_add_uint64(fs, "option_variable", (uint64_t) *option_variable);
 
     uint16_t mss;
-    uint8_t* opt = (uint8_t*) (tcp + sizeof(struct tcphdr));
+//    uint8_t* opt = (uint8_t*) (tcp + sizeof(struct tcphdr));
+    uint8_t* opt = (uint8_t*) (packet + 4 * ip_hdr->ip_hl + sizeof(struct ether_header) + sizeof(struct tcphdr))
     while( *opt != 0 ) {
         tcp_option_t* _opt = (tcp_option_t*)opt;
         if( _opt->kind == 1 /* NOP */ ) {
             ++opt;  // NOP is one byte;
             printf("==================> _opt->kind: %d\n", _opt->kind);
-
             continue;
         }
         if( _opt->kind == 2 /* MSS */ ) {
