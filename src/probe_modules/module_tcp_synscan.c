@@ -165,12 +165,13 @@ void synscan_process_packet(const u_char *packet,
         }
         if( _opt->kind == 2 /* MSS */ ) {
             mss = ntohs((uint16_t)*(opt + sizeof(opt)));
+            if(mss != 0)
+                printf("==================> mss: %d \n", mss);
         }
         opt += _opt->size;
     }
 
-    if(mss != 0)
-        printf("==================> mss: %d \n", mss);
+
 
 
     if (tcp->th_flags & TH_RST) { // RST packet
