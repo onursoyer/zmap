@@ -161,7 +161,6 @@ void synscan_process_packet(const u_char *packet,
         tcp_option_t* _opt = (tcp_option_t*)opt;
         if( _opt->kind == 1 /* NOP */ ) {
             ++opt;  // NOP is one byte;
-            printf("==================> _opt->kind: %d\n", _opt->kind);
             continue;
         }
         if( _opt->kind == 2 /* MSS */ ) {
