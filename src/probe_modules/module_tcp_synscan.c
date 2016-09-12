@@ -118,6 +118,7 @@ int synscan_validate_packet(const struct ip *ip_hdr, uint32_t len,
     return 1;
 }
 
+// [MOBI]
 typedef struct {
     uint8_t kind;
     uint8_t size;
