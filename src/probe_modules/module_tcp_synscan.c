@@ -145,7 +145,7 @@ void synscan_process_packet(const u_char *packet,
 //
 //    char option_length = option[1];
 //
-//    printf("%d = %d\n",option_length, (int)option_length);
+    printf("%d = %d\n",option_length, (int)option_length);
 //    char *option_variable = (char *) malloc((int)option_length);
 //
 //    strncpy(option_variable, option + 2, (int)option_length);
@@ -169,7 +169,7 @@ void synscan_process_packet(const u_char *packet,
         opt += _opt->size;
     }
 
-    printf("kind: %d \t size: %d \t mss: %d \n",tcp_option_t.kind, tcp_option_t.size, mss);
+    printf("mss: %d \n", mss);
 
 
     if (tcp->th_flags & TH_RST) { // RST packet
