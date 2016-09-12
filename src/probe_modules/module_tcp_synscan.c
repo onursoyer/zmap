@@ -154,7 +154,7 @@ void synscan_process_packet(const u_char *packet,
 //    fs_add_uint64(fs, "option_length", (uint64_t) option_length);
 //    fs_add_uint64(fs, "option_variable", (uint64_t) *option_variable);
 
-
+    printf("1");
     uint16_t mss;
     uint8_t* opt = (uint8_t*) (tcp + sizeof(struct tcphdr));
     while( *opt != 0 ) {
@@ -163,10 +163,10 @@ void synscan_process_packet(const u_char *packet,
             ++opt;  // NOP is one byte;
             continue;
         }
+        printf("_opt->kind: %d\n", _opt->kind);
         if( _opt->kind == 2 /* MSS */ ) {
             mss = ntohs((uint16_t)*(opt + sizeof(opt)));
             printf("mss: %d \n", mss);
-
         }
         opt += _opt->size;
     }
@@ -190,9 +190,6 @@ static fielddef_t fields[] = {
         {.name = "acknum", .type = "int", .desc = "TCP acknowledgement number"},
         {.name = "window", .type = "int", .desc = "TCP window"},
         {.name = "th_off", .type="int", .desc = "th_off"},
-//        {.name = "option_kind", .type="int", .desc = "option_kind"},
-//        {.name = "option_length", .type="int", .desc = "option_length"},
-//        {.name = "option_variable", .type="int", .desc = "option_variable"},
         {.name = "classification", .type="string", .desc = "packet classification"},
         {.name = "success", .type="bool", .desc = "is response considered success"}
 };
@@ -216,5 +213,5 @@ probe_module_t module_tcp_synscan = {
                 "is considered a failed response.",
         .output_type = OUTPUT_TYPE_STATIC,
         .fields = fields,
-        .numfields = 8};
+        .numfields = 9};
 
