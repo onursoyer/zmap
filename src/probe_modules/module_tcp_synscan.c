@@ -159,22 +159,19 @@ void synscan_process_packet(const u_char *packet,
     uint8_t* opt = (uint8_t*) (tcp + sizeof(struct tcphdr));
     while( *opt != 0 ) {
         tcp_option_t* _opt = (tcp_option_t*)opt;
+        printf("[START] _opt->kind: %d\n", _opt->kind);
+
         if( _opt->kind == 1 /* NOP */ ) {
             ++opt;  // NOP is one byte;
             continue;
         }
-        printf("[START] _opt->kind: %d\n", _opt->kind);
         if( _opt->kind == 2 /* MSS */ ) {
             mss = ntohs((uint16_t)*(opt + sizeof(opt)));
             printf("mss: %d \n", mss);
+            exit(0);
         }
         opt += _opt->size;
     }
-
-    printf("[END] *opt: %d\n", *opt);
-
-
-
 
 
     if (tcp->th_flags & TH_RST) { // RST packet
