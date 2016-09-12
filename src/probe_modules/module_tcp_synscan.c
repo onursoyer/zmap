@@ -118,6 +118,11 @@ int synscan_validate_packet(const struct ip *ip_hdr, uint32_t len,
     return 1;
 }
 
+typedef struct {
+    uint8_t kind;
+    uint8_t size;
+} tcp_option_t;
+
 void synscan_process_packet(const u_char *packet,
                             __attribute__((unused)) uint32_t len, fieldset_t *fs,
                             __attribute__((unused)) uint32_t *validation) {
@@ -149,11 +154,6 @@ void synscan_process_packet(const u_char *packet,
 //    fs_add_uint64(fs, "option_length", (uint64_t) option_length);
 //    fs_add_uint64(fs, "option_variable", (uint64_t) *option_variable);
 
-
-    typedef struct {
-        uint8_t kind;
-        uint8_t size;
-    } tcp_option_t;
 
     uint16_t mss;
     uint8_t* opt = (uint8_t*) (tcp + sizeof(struct tcphdr));
