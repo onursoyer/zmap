@@ -154,23 +154,23 @@ void synscan_process_packet(const u_char *packet,
 //    fs_add_uint64(fs, "option_length", (uint64_t) option_length);
 //    fs_add_uint64(fs, "option_variable", (uint64_t) *option_variable);
 
-    uint16_t mss;
-    uint8_t* opt = (uint8_t*) (tcp + sizeof(struct tcphdr));
-    while( *opt != 0 ) {
-        tcp_option_t* _opt = (tcp_option_t*)opt;
-        if( _opt->kind == 1 /* NOP */ ) {
-            ++opt;  // NOP is one byte;
-            printf("_opt->kind: %d\n", _opt->kind);
-
-            continue;
-        }
-        if( _opt->kind == 2 /* MSS */ ) {
-            mss = ntohs((uint16_t)*(opt + sizeof(opt)));
-            printf("mss: %d \n", mss);
-            exit(0);
-        }
-        opt += _opt->size;
-    }
+//    uint16_t mss;
+//    uint8_t* opt = (uint8_t*) (tcp + sizeof(struct tcphdr));
+//    while( *opt != 0 ) {
+//        tcp_option_t* _opt = (tcp_option_t*)opt;
+//        if( _opt->kind == 1 /* NOP */ ) {
+//            ++opt;  // NOP is one byte;
+//            printf("_opt->kind: %d\n", _opt->kind);
+//
+//            continue;
+//        }
+//        if( _opt->kind == 2 /* MSS */ ) {
+//            mss = ntohs((uint16_t)*(opt + sizeof(opt)));
+//            printf("mss: %d \n", mss);
+//            exit(0);
+//        }
+//        opt += _opt->size;
+//    }
 
 
     if (tcp->th_flags & TH_RST) { // RST packet
