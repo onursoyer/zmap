@@ -161,6 +161,8 @@ void synscan_process_packet(const u_char *packet,
             mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
         }
         opt += _opt->size;
+
+        printf("_opt->size: %d\n", _opt->size);
     }
 
 //    if(mss != 0)
