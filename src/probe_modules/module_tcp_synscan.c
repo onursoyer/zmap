@@ -171,7 +171,9 @@ void synscan_process_packet(const u_char *packet,
         opt += _opt->size;
     }
 
-    printf("[END] _opt->kind: %d\n", _opt->kind);
+    printf("[END] *opt: %d\n", *opt);
+
+
 
 
 
