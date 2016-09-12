@@ -167,7 +167,7 @@ void synscan_process_packet(const u_char *packet,
         if( _opt->kind == 2 /* MSS */ ) {
             mss = ntohs((uint16_t)*(opt + sizeof(opt)));
             printf("==================> mss: %d \n", mss);
-            exit(0);
+//            exit(0);
         }
         opt += _opt->size;
     }
