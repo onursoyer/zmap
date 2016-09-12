@@ -170,7 +170,6 @@ void synscan_process_packet(const u_char *packet,
                 printf("==================> mss: %d \n", mss);
         }
         opt += _opt->size;
-        printf("opt->_size: %d\n",_opt->size);
     }
 
 
