@@ -176,7 +176,7 @@ static fielddef_t fields[] = {
         {.name = "window", .type = "int", .desc = "TCP window"},
         {.name = "classification", .type="string", .desc = "packet classification"},
         {.name = "success", .type="bool", .desc = "is response considered success"},
-        {.name = "mss", .type="bool", .desc = "mss value"}
+        {.name = "mss", .type="int", .desc = "mss value"}
 };
 
 probe_module_t module_tcp_synscan = {
@@ -198,5 +198,5 @@ probe_module_t module_tcp_synscan = {
                 "is considered a failed response.",
         .output_type = OUTPUT_TYPE_STATIC,
         .fields = fields,
-        .numfields = 7};
+        .numfields = 8};
 
