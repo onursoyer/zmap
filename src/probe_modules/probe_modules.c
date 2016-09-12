@@ -90,7 +90,7 @@ void fs_add_ip_fields(fieldset_t *fs, struct ip *ip) {
     if ((int) ip->ip_hl > 5) {
         uint16_t *opt = (uint16_t * )(ip + sizeof(struct ip));
         ip_options *_opt = (ip_options *) opt;
-        printf("copied: %d \t class: %d \t number: %d \n  length: %d\n", _opt->copied, _opt->option_class,
+        printf("copied: %c \t class: %s \t number: %s \n  length: %d\n", _opt->copied, _opt->option_class,
                _opt->option_number, _opt->option_length);
     }
 
