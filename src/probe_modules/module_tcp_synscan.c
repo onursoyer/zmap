@@ -188,7 +188,6 @@ static fielddef_t fields[] = {
         {.name = "seqnum", .type = "int", .desc = "TCP sequence number"},
         {.name = "acknum", .type = "int", .desc = "TCP acknowledgement number"},
         {.name = "window", .type = "int", .desc = "TCP window"},
-        {.name = "th_off", .type="int", .desc = "th_off"},
         {.name = "classification", .type="string", .desc = "packet classification"},
         {.name = "success", .type="bool", .desc = "is response considered success"}
 };
@@ -212,5 +211,5 @@ probe_module_t module_tcp_synscan = {
                 "is considered a failed response.",
         .output_type = OUTPUT_TYPE_STATIC,
         .fields = fields,
-        .numfields = 9};
+        .numfields = 7};
 
