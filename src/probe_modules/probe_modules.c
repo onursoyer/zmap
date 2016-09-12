@@ -99,8 +99,7 @@ void fs_add_system_fields(fieldset_t *fs, int is_repeat, int in_cooldown) {
     fs_add_uint64(fs, "timestamp_us", (uint64_t) t.tv_usec);
 }
 
-//int ip_fields_len = 12;
-int ip_fields_len = 6;
+int ip_fields_len = 12;
 fielddef_t ip_fields[] = {
         {.name="saddr", .type="string", .desc="source IP address of response"},
         {.name="saddr_raw", .type="int", .desc="network order integer form of source IP address"},
@@ -108,12 +107,12 @@ fielddef_t ip_fields[] = {
         {.name="daddr_raw", .type="int", .desc="network order integer form of destination IP address"},
         {.name="ipid", .type="int", .desc="IP identification number of response"},
         {.name="ttl", .type="int", .desc="time-to-live of response packet"},
-//        {.name="ip_hl", .type="int", .desc="header_length"},
-//        {.name="ip_v", .type="int", .desc="version"},
-//        {.name="ip_tos", .type="int", .desc="type of service"},
-//        {.name="ip_len", .type="int", .desc="total length"},
-//        {.name="ip_p", .type="int", .desc="protocol"},
-//        {.name="ip_sum", .type="int", .desc="checksum"},
+        {.name="ip_hl", .type="int", .desc="header_length"},
+        {.name="ip_v", .type="int", .desc="version"},
+        {.name="ip_tos", .type="int", .desc="type of service"},
+        {.name="ip_len", .type="int", .desc="total length"},
+        {.name="ip_p", .type="int", .desc="protocol"},
+        {.name="ip_sum", .type="int", .desc="checksum"},
 };
 
 int sys_fields_len = 5;
