@@ -136,26 +136,19 @@ void synscan_process_packet(const u_char *packet,
     fs_add_uint64(fs, "acknum", (uint64_t) ntohl(tcp->th_ack));
     fs_add_uint64(fs, "window", (uint64_t) ntohs(tcp->th_win));
 
+    if (tcp->th_flags & TH_RST) { // RST packet
+        fs_add_string(fs, "classification", (char *) "rst", 0);
+        fs_add_bool(fs, "success", 0);
+    } else { // SYNACK packet
+        fs_add_string(fs, "classification", (char *) "synack", 0);
+        fs_add_bool(fs, "success", 1);
+    }
+
+
+
     // [MOBI]
-//    fs_add_uint64(fs, "th_off", tcp->th_off);
-//
-////    char *option = (char *) (tcp + sizeof(struct tcphdr));
-//    char *option = (char *) tcp + tcp->th_off;
-//    char option_kind = option[0];
-//
-//    char option_length = option[1];
-//
-//    printf("%d = %d\n",option_length, (int)option_length);
-//    char *option_variable = (char *) malloc((int)option_length);
-//
-//    strncpy(option_variable, option + 2, (int)option_length);
-
-//    fs_add_uint64(fs, "option_kind", (uint64_t) option_kind);
-//    fs_add_uint64(fs, "option_length", (uint64_t) option_length);
-//    fs_add_uint64(fs, "option_variable", (uint64_t) *option_variable);
-
+    // MSS Parsing
     uint16_t mss = 0;
-//    uint8_t* opt = (uint8_t*) (tcp + sizeof(struct tcphdr));
     uint8_t* opt = (uint8_t*) (packet + 4 * ip_hdr->ip_hl + sizeof(struct ether_header) + sizeof(struct tcphdr));
     while( *opt != 0 ) {
         tcp_option_t* _opt = (tcp_option_t*)opt;
@@ -164,24 +157,15 @@ void synscan_process_packet(const u_char *packet,
             continue;
         }
         if( _opt->kind == 2 /* MSS */ ) {
-//            mss = ntohs((uint16_t)*(opt + sizeof(opt)));
             mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
-
         }
         opt += _opt->size;
     }
 
     if(mss != 0)
-        printf("==================> mss: %d \n", mss);
-
-
-    if (tcp->th_flags & TH_RST) { // RST packet
-        fs_add_string(fs, "classification", (char *) "rst", 0);
-        fs_add_bool(fs, "success", 0);
-    } else { // SYNACK packet
-        fs_add_string(fs, "classification", (char *) "synack", 0);
-        fs_add_bool(fs, "success", 1);
-    }
+        fs_add_uint64(fs, "mss", mss);
+    else
+        fs_add_uint64(fs, "mss", mss);
 }
 
 static fielddef_t fields[] = {
@@ -191,7 +175,8 @@ static fielddef_t fields[] = {
         {.name = "acknum", .type = "int", .desc = "TCP acknowledgement number"},
         {.name = "window", .type = "int", .desc = "TCP window"},
         {.name = "classification", .type="string", .desc = "packet classification"},
-        {.name = "success", .type="bool", .desc = "is response considered success"}
+        {.name = "success", .type="bool", .desc = "is response considered success"},
+        {.name = "mss", .type="bool", .desc = "mss value"}
 };
 
 probe_module_t module_tcp_synscan = {
