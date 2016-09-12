@@ -162,16 +162,14 @@ void synscan_process_packet(const u_char *packet,
         }
         opt += _opt->size;
 
-        printf("_opt->size: %d\n", _opt->size);
-
         if(_opt->size == 0)
             break;
     }
 
-//    if(mss != 0)
-//        fs_add_uint64(fs, "mss", mss);
-//    else
-//        fs_add_uint64(fs, "mss", 0);
+    if(mss != 0)
+        fs_add_uint64(fs, "mss", mss);
+    else
+        fs_add_uint64(fs, "mss", 0);
 }
 
 static fielddef_t fields[] = {
@@ -181,8 +179,8 @@ static fielddef_t fields[] = {
         {.name = "acknum", .type = "int", .desc = "TCP acknowledgement number"},
         {.name = "window", .type = "int", .desc = "TCP window"},
         {.name = "classification", .type="string", .desc = "packet classification"},
-        {.name = "success", .type="bool", .desc = "is response considered success"}
-//        {.name = "mss", .type="int", .desc = "mss value"}
+        {.name = "success", .type="bool", .desc = "is response considered success"},
+        {.name = "mss", .type="int", .desc = "mss value"}
 };
 
 probe_module_t module_tcp_synscan = {
@@ -204,6 +202,5 @@ probe_module_t module_tcp_synscan = {
                 "is considered a failed response.",
         .output_type = OUTPUT_TYPE_STATIC,
         .fields = fields,
-//        .numfields = 8};
-        .numfields = 7};
+        .numfields = 8};
 

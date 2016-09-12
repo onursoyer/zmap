@@ -71,13 +71,13 @@ void fs_add_ip_fields(fieldset_t *fs, struct ip *ip) {
     fs_add_uint64(fs, "ipid", ntohs(ip->ip_id));
     fs_add_uint64(fs, "ttl", ip->ip_ttl);
 
-//    // [MOBI]
-//    fs_add_uint64(fs, "ip_hl", ip->ip_hl);
-//    fs_add_uint64(fs, "ip_v", ip->ip_v);
-//    fs_add_uint64(fs, "ip_tos", ip->ip_tos);
-//    fs_add_uint64(fs, "ip_len", ip->ip_len);
-//    fs_add_uint64(fs, "ip_p", ip->ip_p);
-//    fs_add_uint64(fs, "ip_sum", ip->ip_sum);
+    // [MOBI]
+    fs_add_uint64(fs, "ip_hl", ip->ip_hl);
+    fs_add_uint64(fs, "ip_v", ip->ip_v);
+    fs_add_uint64(fs, "ip_tos", ip->ip_tos);
+    fs_add_uint64(fs, "ip_len", ip->ip_len);
+    fs_add_uint64(fs, "ip_p", ip->ip_p);
+    fs_add_uint64(fs, "ip_sum", ip->ip_sum);
 }
 
 #define TIMESTR_LEN 55
