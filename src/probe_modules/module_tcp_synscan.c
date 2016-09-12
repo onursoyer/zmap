@@ -132,23 +132,44 @@ void synscan_process_packet(const u_char *packet,
     fs_add_uint64(fs, "window", (uint64_t) ntohs(tcp->th_win));
 
     // [MOBI]
-    fs_add_uint64(fs, "th_off", tcp->th_off);
+//    fs_add_uint64(fs, "th_off", tcp->th_off);
+//
+////    char *option = (char *) (tcp + sizeof(struct tcphdr));
+//    char *option = (char *) tcp + tcp->th_off;
+//    char option_kind = option[0];
+//
+//    char option_length = option[1];
+//
+//    printf("%d = %d\n",option_length, (int)option_length);
+//    char *option_variable = (char *) malloc((int)option_length);
+//
+//    strncpy(option_variable, option + 2, (int)option_length);
 
-//    char *option = (char *) (tcp + sizeof(struct tcphdr));
-    char *option = (char *) tcp + tcp->th_off;
-    char option_kind = option[0];
+//    fs_add_uint64(fs, "option_kind", (uint64_t) option_kind);
+//    fs_add_uint64(fs, "option_length", (uint64_t) option_length);
+//    fs_add_uint64(fs, "option_variable", (uint64_t) *option_variable);
 
-    char option_length = option[1];
 
-    printf("%d = %d\n",option_length, (int)option_length);
-    char *option_variable = (char *) malloc((int)option_length);
+    typedef struct {
+        uint8_t kind;
+        uint8_t size;
+    } tcp_option_t;
 
-    strncpy(option_variable, option + 2, (int)option_length);
+    uint16_t mss;
+    uint8_t* opt = (uint8_t*) (tcp + sizeof(struct tcphdr));
+    while( *opt != 0 ) {
+        tcp_option_t* _opt = (tcp_option_t*)opt;
+        if( _opt->kind == 1 /* NOP */ ) {
+            ++opt;  // NOP is one byte;
+            continue;
+        }
+        if( _opt->kind == 2 /* MSS */ ) {
+            mss = ntohs((uint16_t)*(opt + sizeof(opt)));
+        }
+        opt += _opt->size;
+    }
 
-    fs_add_uint64(fs, "option_kind", (uint64_t) option_kind);
-    fs_add_uint64(fs, "option_length", (uint64_t) option_length);
-    fs_add_uint64(fs, "option_variable", (uint64_t) *option_variable);
-
+    printf("kind: %d \t size: %d",tcp_option_t.kind, tcp_option_t.size);
 
     if (tcp->th_flags & TH_RST) { // RST packet
         fs_add_string(fs, "classification", (char *) "rst", 0);
@@ -166,9 +187,9 @@ static fielddef_t fields[] = {
         {.name = "acknum", .type = "int", .desc = "TCP acknowledgement number"},
         {.name = "window", .type = "int", .desc = "TCP window"},
         {.name = "th_off", .type="int", .desc = "th_off"},
-        {.name = "option_kind", .type="int", .desc = "option_kind"},
-        {.name = "option_length", .type="int", .desc = "option_length"},
-        {.name = "option_variable", .type="int", .desc = "option_variable"},
+//        {.name = "option_kind", .type="int", .desc = "option_kind"},
+//        {.name = "option_length", .type="int", .desc = "option_length"},
+//        {.name = "option_variable", .type="int", .desc = "option_variable"},
         {.name = "classification", .type="string", .desc = "packet classification"},
         {.name = "success", .type="bool", .desc = "is response considered success"}
 };
@@ -192,5 +213,5 @@ probe_module_t module_tcp_synscan = {
                 "is considered a failed response.",
         .output_type = OUTPUT_TYPE_STATIC,
         .fields = fields,
-        .numfields = 11};
+        .numfields = 8};
 
