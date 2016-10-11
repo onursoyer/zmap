@@ -151,7 +151,7 @@ void synscan_process_packet(const u_char *packet,
     // MSS Parsing
     uint16_t mss = 0;
     printf("[TEST] 111111 \n");
-    unsigned char *tmp = tcp;
+    uint8_t *tmp = (uint8_t * )tcp;
 
     if (tcp->doff > 5) {
         uint8_t *opt = (uint8_t * )(tmp + sizeof(struct tcphdr));
