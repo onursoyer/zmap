@@ -151,37 +151,51 @@ void synscan_process_packet(const u_char *packet,
 
     // [MOBI]
     // MSS Parsing
-    uint16_t mss = 0;
-//    uint8_t *tmp = (uint8_t *) tcp;
-    if (tcp->th_off > 5) {
-        unsigned char *tmp = tcp;
-//        uint8_t *opt = (uint8_t * )((char *) tcp + sizeof(struct tcphdr));
-        unsigned char* opt = tmp + sizeof(struct tcphdr);
-        printf("[TEST] src: %s\n", inet_ntoa(ip_hdr->ip_src));
-        printf("[TEST] dst: %s\n", inet_ntoa(ip_hdr->ip_dst));
-        while (*opt != 0) {
-            printf("[TEST] 33333333 \n");
-            tcp_option_t *_opt = (tcp_option_t *) opt;
-            if (_opt->kind == 1 /* NOP */ ) {
-                ++opt;  // NOP is one byte;
-                printf("[TEST] 4444444 \n");
-                continue;
-            }
-            if (_opt->kind == 2 /* MSS */ ) {
-                if (_opt->size == 4) {
+//    uint16_t mss = 0;
+////    uint8_t *tmp = (uint8_t *) tcp;
+//    if (tcp->th_off > 5) {
+//        unsigned char *tmp = tcp;
+////        uint8_t *opt = (uint8_t * )((char *) tcp + sizeof(struct tcphdr));
+//        unsigned char* opt = tmp + sizeof(struct tcphdr);
+//        printf("[TEST] src: %s\n", inet_ntoa(ip_hdr->ip_src));
+//        printf("[TEST] dst: %s\n", inet_ntoa(ip_hdr->ip_dst));
+//        while (*opt != 0) {
+//            printf("[TEST] 33333333 \n");
+//            tcp_option_t *_opt = (tcp_option_t *) opt;
+//            if (_opt->kind == 1 /* NOP */ ) {
+//                ++opt;  // NOP is one byte;
+//                printf("[TEST] 4444444 \n");
+//                continue;
+//            }
+//            if (_opt->kind == 2 /* MSS */ ) {
+//                if (_opt->size == 4) {
+//
+//                }
+////                mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
+////                unsigned int* mss_opt = (unsigned int*)(opt + sizeof(tcp_option_t));
+////                mss = htons(*mss_opt);
+//            }
+//            opt += _opt->size;
+//            printf("[TEST] 5555555 \n");
+//
+//            if (_opt->size == 0) {
+//                break;
+//            }
+//        }
+//    }
 
-                }
-//                mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
-//                unsigned int* mss_opt = (unsigned int*)(opt + sizeof(tcp_option_t));
-//                mss = htons(*mss_opt);
-            }
-            opt += _opt->size;
-            printf("[TEST] 5555555 \n");
-
-            if (_opt->size == 0) {
-                break;
-            }
+    uint16_t mss;
+    uint8_t* opt = (uint8_t*)(packet + 20 + sizeof(ether_header_t) + sizeof(tcp_header_t))
+    while( *opt != 0 ) {
+        tcp_option_t* _opt = (tcp_option_t*)opt;
+        if( _opt->kind == 1 /* NOP */ ) {
+            ++opt;  // NOP is one byte;
+            continue;
         }
+//        if( _opt->kind == 2 /* MSS */ ) {
+//            mss = ntohs((uint16_t)*(opt + sizeof(opt)));
+//        }
+        opt += _opt->size;
     }
 //    if (mss != 0)
 //        fs_add_uint64(fs, "mss", mss);
