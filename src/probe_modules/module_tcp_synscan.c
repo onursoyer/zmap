@@ -164,7 +164,9 @@ void synscan_process_packet(const u_char *packet,
                 continue;
             }
             if (_opt->kind == 2 /* MSS */ ) {
-                mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
+//                mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
+//                unsigned int* mss_opt = (unsigned int*)(opt + sizeof(tcp_option_t));
+//                mss = htons(*mss_opt);
             }
             opt += _opt->size;
 //            printf("[TEST] 5555555 \n");
