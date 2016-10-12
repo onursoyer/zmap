@@ -192,15 +192,17 @@ void synscan_process_packet(const u_char *packet,
             ++opt;  // NOP is one byte;
             continue;
         }
-//        if( _opt->kind == 2 /* MSS */ ) {
+        if( _opt->kind == 2 /* MSS */ ) {
 //            mss = ntohs((uint16_t)*(opt + sizeof(opt)));
-//        }
+            mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
+        }
         opt += _opt->size;
     }
-//    if (mss != 0)
-//        fs_add_uint64(fs, "mss", mss);
-//    else
-//        fs_add_uint64(fs, "mss", 0);
+
+    if (mss != 0)
+        fs_add_uint64(fs, "mss", mss);
+    else
+        fs_add_uint64(fs, "mss", 0);
 }
 
 static fielddef_t fields[] = {
