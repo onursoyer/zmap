@@ -97,7 +97,7 @@ void gen_fielddef_set(fielddefset_t *fds, fielddef_t fs[], int len);
 
 void fs_add_null(fieldset_t *fs, const char *name);
 
-void just fs_add_uint64(fieldset_t *fs, const char *name, uint64_t value);
+void fs_add_uint64(fieldset_t *fs, const char *name, uint64_t value);
 
 void fs_add_bool(fieldset_t *fs, const char *name, int value);
 
