@@ -188,6 +188,11 @@ void synscan_process_packet(const u_char *packet,
     uint8_t* opt = (uint8_t*)(packet + 20 + sizeof(struct ether_header) + sizeof(struct tcphdr));
     while( *opt != 0 ) {
         tcp_option_t* _opt = (tcp_option_t*)opt;
+
+        if (_opt->size == 0) {
+            break;
+        }
+
         if( _opt->kind == 1 /* NOP */ ) {
             ++opt;  // NOP is one byte;
             continue;
