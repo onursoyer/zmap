@@ -161,7 +161,8 @@ void synscan_process_packet(const u_char *packet,
         printf("[TEST] 222222  == %lu \n", sizeof(struct tcphdr));
         printf("[TEST] src: %s\n", inet_ntoa(ip_hdr->ip_src));
         printf("[TEST] dst: %s\n", inet_ntoa(ip_hdr->ip_dst));
-        printf("[TEST] opt: %d\n", *opt);
+        printf("[TEST] opt-1: %d\n", opt);
+        printf("[TEST] opt-2: %d\n", *opt);
         while (*opt != 0) {
             printf("[TEST] 33333333 \n");
             tcp_option_t *_opt = (tcp_option_t *) opt;
