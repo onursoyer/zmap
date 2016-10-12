@@ -158,7 +158,7 @@ void synscan_process_packet(const u_char *packet,
 //    printf("[MOBI] tcphdr_size: %d\n", tcphdr_size);
     if (tcp->th_off > 5) {
         uint8_t *opt = (uint8_t * )((char *) tcp + sizeof(struct tcphdr));
-        printf("[TEST] 222222  == %d \n", sizeof(struct tcphdr));
+        printf("[TEST] 222222  == %lud \n", sizeof(struct tcphdr));
         printf("[TEST] src: %s\n", inet_ntoa(ip_hdr->ip_src));
         printf("[TEST] dst: %s\n", inet_ntoa(ip_hdr->ip_dst));
         while (*opt != 0) {
