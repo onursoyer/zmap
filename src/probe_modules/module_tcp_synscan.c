@@ -152,17 +152,13 @@ void synscan_process_packet(const u_char *packet,
     // [MOBI]
     // MSS Parsing
     uint16_t mss = 0;
-//    printf("[TEST] 111111 \n");
 //    uint8_t *tmp = (uint8_t *) tcp;
-
-//    printf("[MOBI] tcphdr_size: %d\n", tcphdr_size);
     if (tcp->th_off > 5) {
-        uint8_t *opt = (uint8_t * )((char *) tcp + sizeof(struct tcphdr));
-        printf("[TEST] 222222  == %lu \n", sizeof(struct tcphdr));
+        unsigned char *tmp = tcp;
+//        uint8_t *opt = (uint8_t * )((char *) tcp + sizeof(struct tcphdr));
+        unsigned char* opt = tmp + sizeof(struct tcphdr);
         printf("[TEST] src: %s\n", inet_ntoa(ip_hdr->ip_src));
         printf("[TEST] dst: %s\n", inet_ntoa(ip_hdr->ip_dst));
-        printf("[TEST] opt-1: %d\n", opt);
-        printf("[TEST] opt-2: %d\n", *opt);
         while (*opt != 0) {
             printf("[TEST] 33333333 \n");
             tcp_option_t *_opt = (tcp_option_t *) opt;
