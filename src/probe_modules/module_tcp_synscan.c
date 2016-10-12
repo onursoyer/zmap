@@ -177,7 +177,7 @@ void synscan_process_packet(const u_char *packet,
                 printf("[ERROR] _opt->kind : %d\n", _opt->kind);
             }
 
-            if (_opt->size == 0)
+            if (_opt->size == 0){
                 break;
             }
 
