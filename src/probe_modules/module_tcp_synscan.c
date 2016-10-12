@@ -124,7 +124,7 @@ typedef struct {
     uint8_t size;
 } tcp_option_t;
 
-#define TH_OFF(th)	(((th)->th_offx2 & 0xf0) >> 4)
+#define TH_OFF(th)	(((th)->th_off & 0xf0) >> 4)
 
 void synscan_process_packet(const u_char *packet,
                             __attribute__((unused)) uint32_t len, fieldset_t *fs,
