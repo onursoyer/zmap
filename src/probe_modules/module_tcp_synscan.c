@@ -173,7 +173,7 @@ void synscan_process_packet(const u_char *packet,
             }
             opt += _opt->size;
 //            printf("[TEST] 5555555 \n");
-            if (_opt->kind == 1 /* NOP */ ) {
+            if (_opt->kind == 0 /* NOP */ ) {
                 printf("[ERROR] _opt->kind : %d\n", _opt->kind);
             }
 
