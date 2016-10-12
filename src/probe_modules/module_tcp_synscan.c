@@ -157,6 +157,7 @@ void synscan_process_packet(const u_char *packet,
     int tcphdr_size = TH_OFF(tcp)*4;
 
     if (tcphdr_size > 20) {
+        printf("[MOBI] tcphdr_size: %d\n", tcphdr_size);
         if (tcp->th_off > 5) {
             uint8_t *opt = (uint8_t * )((char *) tmp + sizeof(struct tcphdr));
 //        printf("[TEST] 222222 \n");
