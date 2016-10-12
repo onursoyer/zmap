@@ -164,11 +164,6 @@ void synscan_process_packet(const u_char *packet,
         while (*opt != 0) {
             printf("[TEST] 33333333 \n");
             tcp_option_t *_opt = (tcp_option_t *) opt;
-
-            if (_opt->size == 0) {
-                break;
-            }
-
             if (_opt->kind == 1 /* NOP */ ) {
                 ++opt;  // NOP is one byte;
                 printf("[TEST] 4444444 \n");
@@ -185,15 +180,15 @@ void synscan_process_packet(const u_char *packet,
             opt += _opt->size;
             printf("[TEST] 5555555 \n");
 
-//            if (_opt->size == 0) {
-//                break;
-//            }
+            if (_opt->size == 0) {
+                break;
+            }
         }
     }
-    if (mss != 0)
-        fs_add_uint64(fs, "mss", mss);
-    else
-        fs_add_uint64(fs, "mss", 0);
+//    if (mss != 0)
+//        fs_add_uint64(fs, "mss", mss);
+//    else
+//        fs_add_uint64(fs, "mss", 0);
 }
 
 static fielddef_t fields[] = {
