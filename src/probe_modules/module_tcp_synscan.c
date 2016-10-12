@@ -152,7 +152,6 @@ void synscan_process_packet(const u_char *packet,
     uint16_t mss = 0;
 //    printf("[TEST] 111111 \n");
     uint8_t *tmp = (uint8_t * )tcp;
-    printf("tcp->th_off: %d \t tcp->doff ", tcp->th_off, tcp->doff );
     if (tcp->th_off > 5) {
         uint8_t *opt = (uint8_t * )(tmp + sizeof(struct tcphdr));
 //        printf("[TEST] 222222 \n");
