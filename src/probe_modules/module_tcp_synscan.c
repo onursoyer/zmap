@@ -124,6 +124,8 @@ typedef struct {
     uint8_t size;
 } tcp_option_t;
 
+#define TH_OFF(th)	(((th)->th_offx2 & 0xf0) >> 4)
+
 void synscan_process_packet(const u_char *packet,
                             __attribute__((unused)) uint32_t len, fieldset_t *fs,
                             __attribute__((unused)) uint32_t *validation) {
@@ -151,39 +153,36 @@ void synscan_process_packet(const u_char *packet,
     // MSS Parsing
     uint16_t mss = 0;
 //    printf("[TEST] 111111 \n");
-    uint8_t *tmp = (uint8_t * )tcp;
-    if (tcp->th_off > 5) {
-        uint8_t *opt = (uint8_t * )((char *)tmp + sizeof(struct tcphdr));
+    uint8_t *tmp = (uint8_t *) tcp;
+    int tcphdr_size = TH_OFF(tcp)*4;
+
+    if (tcphdr_size > 20) {
+        if (tcp->th_off > 5) {
+            uint8_t *opt = (uint8_t * )((char *) tmp + sizeof(struct tcphdr));
 //        printf("[TEST] 222222 \n");
-        while (*opt != 0) {
+            while (*opt != 0) {
 //            printf("[TEST] 33333333 \n");
-            tcp_option_t *_opt = (tcp_option_t *) opt;
-            if (_opt->kind == 0 /* NOP */ ) {
-                printf("[ERROR] _opt->kind : %d\n", _opt->kind);
-            }
-
-            if (_opt->kind == 1 /* NOP */ ) {
-                ++opt;  // NOP is one byte;
+                tcp_option_t *_opt = (tcp_option_t *) opt;
+                if (_opt->kind == 1 /* NOP */ ) {
+                    ++opt;  // NOP is one byte;
 //                printf("[TEST] 4444444 \n");
-                continue;
-            }
-            if (_opt->kind == 2 /* MSS */ ) {
-                if(_opt->size == 4){
-
+                    continue;
                 }
+                if (_opt->kind == 2 /* MSS */ ) {
+                    if (_opt->size == 4) {
+
+                    }
 //                mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
 //                unsigned int* mss_opt = (unsigned int*)(opt + sizeof(tcp_option_t));
 //                mss = htons(*mss_opt);
-            }
-            opt += _opt->size;
+                }
+                opt += _opt->size;
 //            printf("[TEST] 5555555 \n");
 
-
-            if (_opt->size == 0){
-                break;
+                if (_opt->size == 0) {
+                    break;
+                }
             }
-
-
         }
     }
     if (mss != 0)
