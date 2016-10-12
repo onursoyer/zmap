@@ -153,26 +153,26 @@ void synscan_process_packet(const u_char *packet,
 //    printf("[TEST] 111111 \n");
     uint8_t *tmp = (uint8_t * )tcp;
 
-    if (tcp->doff > 5) {
-        uint8_t *opt = (uint8_t * )(tmp + sizeof(struct tcphdr));
-//        printf("[TEST] 222222 \n");
-        while (*opt != 0) {
-//            printf("[TEST] 33333333 \n");
-            tcp_option_t *_opt = (tcp_option_t *) opt;
-            if (_opt->kind == 1 /* NOP */ ) {
-                ++opt;  // NOP is one byte;
-//                printf("[TEST] 4444444 \n");
-                continue;
-            }
-            if (_opt->kind == 2 /* MSS */ ) {
-                mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
-            }
-            opt += _opt->size;
-//            printf("[TEST] 5555555 \n");
-            if (_opt->size == 0)
-                break;
-        }
-    }
+//    if (tcp->doff > 5) {
+//        uint8_t *opt = (uint8_t * )(tmp + sizeof(struct tcphdr));
+////        printf("[TEST] 222222 \n");
+//        while (*opt != 0) {
+////            printf("[TEST] 33333333 \n");
+//            tcp_option_t *_opt = (tcp_option_t *) opt;
+//            if (_opt->kind == 1 /* NOP */ ) {
+//                ++opt;  // NOP is one byte;
+////                printf("[TEST] 4444444 \n");
+//                continue;
+//            }
+//            if (_opt->kind == 2 /* MSS */ ) {
+//                mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
+//            }
+//            opt += _opt->size;
+////            printf("[TEST] 5555555 \n");
+//            if (_opt->size == 0)
+//                break;
+//        }
+//    }
     if (mss != 0)
         fs_add_uint64(fs, "mss", mss);
     else
