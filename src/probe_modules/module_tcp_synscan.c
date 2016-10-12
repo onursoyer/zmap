@@ -185,7 +185,7 @@ void synscan_process_packet(const u_char *packet,
 //    }
 
     uint16_t mss;
-    uint8_t* opt = (uint8_t*)(packet + 20 + sizeof(ether_header_t) + sizeof(tcp_header_t))
+    uint8_t* opt = (uint8_t*)(packet + 20 + sizeof(ether_header_t) + sizeof(tcp_header_t));
     while( *opt != 0 ) {
         tcp_option_t* _opt = (tcp_option_t*)opt;
         if( _opt->kind == 1 /* NOP */ ) {
