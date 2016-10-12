@@ -154,7 +154,7 @@ void synscan_process_packet(const u_char *packet,
     uint16_t mss = 0;
 //    printf("[TEST] 111111 \n");
     uint8_t *tmp = (uint8_t *) tcp;
-    int tcphdr_size = TH_OFF(tcp)*4;
+    u_int tcphdr_size = TH_OFF(tcp)*4;
 
     printf("[MOBI] tcphdr_size: %d\n", tcphdr_size);
 
