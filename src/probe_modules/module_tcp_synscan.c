@@ -168,7 +168,7 @@ void synscan_process_packet(const u_char *packet,
 //                unsigned int* mss_opt = (unsigned int*)(opt + sizeof(tcp_option_t));
 //                mss = htons(*mss_opt);
             }
-            opt += _opt->size;
+//            opt += _opt->size;
 //            printf("[TEST] 5555555 \n");
             if (_opt->size == 0)
                 break;
