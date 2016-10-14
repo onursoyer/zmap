@@ -193,7 +193,7 @@ void synscan_process_packet(const u_char *packet,
     uint8_t *opt = (uint8_t * )(packet + 20 + sizeof(struct ether_header) + sizeof(struct tcphdr));
 //    if (tcp->th_off > 5) {
 
-        tcp_option_t *_opt = (tcp_option_t *) opt;
+//        tcp_option_t *_opt = (tcp_option_t *) opt;
 //        printf("_opt->size %d \t *opt != 0: %d\n", _opt->size, *opt != 0);
         while (*opt != 0) {
             tcp_option_t *_opt = (tcp_option_t *) opt;
