@@ -226,7 +226,7 @@ void synscan_process_packet(const u_char *packet,
             }
             printf("444444\n");
             if(*opt != 0){
-
+                break;
             }
             printf("555555\n");
         }
