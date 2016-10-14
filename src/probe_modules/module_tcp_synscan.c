@@ -191,7 +191,7 @@ void synscan_process_packet(const u_char *packet,
 
     uint16_t mss = 0;
     uint8_t *opt = (uint8_t * )(packet + 20 + sizeof(struct ether_header) + sizeof(struct tcphdr));
-//    if (tcp->th_off > 5) {
+    if (tcp->th_off > 5) {
 
 //        tcp_option_t *_opt = (tcp_option_t *) opt;
 //        printf("_opt->size %d \t *opt != 0: %d\n", _opt->size, *opt != 0);
@@ -225,12 +225,12 @@ void synscan_process_packet(const u_char *packet,
                 break;
             }
 
-            if(*opt != 0){
+            if (*opt != 0) {
 //                printf("555555\n");
                 break;
             }
         }
-//    }
+    }
 
 //    if (mss != 0)
 //        fs_add_uint64(fs, "mss", mss);
