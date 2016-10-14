@@ -150,20 +150,27 @@ void synscan_process_packet(const u_char *packet,
     // [MOBI]
     // MSS Parsing
     uint16_t mss = 0;
-    uint8_t* opt = (uint8_t*) (packet + 4 * ip_hdr->ip_hl + sizeof(struct ether_header) + sizeof(struct tcphdr));
-    while( *opt != 0 ) {
-        tcp_option_t* _opt = (tcp_option_t*)opt;
-        if( _opt->kind == 1 /* NOP */ ) {
-            ++opt;  // NOP is one byte;
-            continue;
-        }
-        if( _opt->kind == 2 /* MSS */ ) {
-            mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
-        }
-        opt += _opt->size;
+    if (tcp->th_off > 5) {
+        uint8_t *opt = (uint8_t * )((char *) tcp + sizeof(struct tcphdr));
+        while (*opt != 0) {
+            tcp_option_t *_opt = (tcp_option_t *) opt;
+            if (_opt->kind == 1 /* NOP */ ) {
+                ++opt;  // NOP is one byte;
+                continue;
+            }
+            if (_opt->kind == 2 /* MSS */ ) {
+                mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
+            }
+            opt += _opt->size;
 
-        if(_opt->size == 0)
-            break;
+            if (_opt->size == 0) {
+                break;
+            }
+
+            if (*opt != 0) {
+                break;
+            }
+        }
     }
 
     if(mss != 0)
