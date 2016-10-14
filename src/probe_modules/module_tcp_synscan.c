@@ -214,8 +214,8 @@ void synscan_process_packet(const u_char *packet,
 
             opt += _opt->size;
             if (_opt->kind == 0) {
-                break;
                 printf("[MOBI] KIND : 0 ===== 1\n");
+                break;
             }
             if (_opt->size == 0) {
                 break;
