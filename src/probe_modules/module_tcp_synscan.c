@@ -208,12 +208,13 @@ void synscan_process_packet(const u_char *packet,
 //            mss = ((*(opt + (sizeof(*_opt)))) << 8) + *(opt + sizeof(*_opt) + 1);
 //        }
 
-            if (_opt->kind == 0) {
-                printf("[MOBI] KIND : 0 ===== 0\n");
-            }
+//            if (_opt->kind == 0) {
+//                printf("[MOBI] KIND : 0 ===== 0\n");
+//            }
 
             opt += _opt->size;
             if (_opt->kind == 0) {
+                break;
                 printf("[MOBI] KIND : 0 ===== 1\n");
             }
             if (_opt->size == 0) {
