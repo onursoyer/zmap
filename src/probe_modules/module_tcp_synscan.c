@@ -194,14 +194,14 @@ void synscan_process_packet(const u_char *packet,
 //    if (tcp->th_off > 5) {
 
         tcp_option_t *_opt = (tcp_option_t *) opt;
-        printf("_opt->size %d \t *opt != 0: %d\n", _opt->size, *opt != 0);
+//        printf("_opt->size %d \t *opt != 0: %d\n", _opt->size, *opt != 0);
         while (*opt != 0) {
             tcp_option_t *_opt = (tcp_option_t *) opt;
 
             if (_opt->size == 0) {
                 break;
             }
-            printf("111111\n");
+//            printf("111111\n");
             if (_opt->kind == 1 /* NOP */ ) {
                 ++opt;  // NOP is one byte;
                 continue;
@@ -214,21 +214,21 @@ void synscan_process_packet(const u_char *packet,
 //            if (_opt->kind == 0) {
 //                printf("[MOBI] KIND : 0 ===== 0\n");
 //            }
-            printf("2222222\n");
+
             opt += _opt->size;
             if (_opt->kind == 0) {
 //                printf("[MOBI] KIND : 0 ===== 1\n");
                 break;
             }
-            printf("333333\n");
+
             if (_opt->size == 0) {
                 break;
             }
-            printf("444444\n");
+
             if(*opt != 0){
+//                printf("555555\n");
                 break;
             }
-            printf("555555\n");
         }
 //    }
 
