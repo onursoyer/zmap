@@ -201,7 +201,7 @@ void synscan_process_packet(const u_char *packet,
             if (_opt->size == 0) {
                 break;
             }
-
+            printf("111111\n");
             if (_opt->kind == 1 /* NOP */ ) {
                 ++opt;  // NOP is one byte;
                 continue;
@@ -214,20 +214,21 @@ void synscan_process_packet(const u_char *packet,
 //            if (_opt->kind == 0) {
 //                printf("[MOBI] KIND : 0 ===== 0\n");
 //            }
-
+            printf("2222222\n");
             opt += _opt->size;
             if (_opt->kind == 0) {
 //                printf("[MOBI] KIND : 0 ===== 1\n");
                 break;
             }
+            printf("333333\n");
             if (_opt->size == 0) {
                 break;
             }
-
+            printf("444444\n");
             if(*opt != 0){
 
             }
-            printf("end\n");
+            printf("555555\n");
         }
 //    }
 
