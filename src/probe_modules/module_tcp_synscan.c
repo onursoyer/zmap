@@ -194,9 +194,7 @@ void synscan_process_packet(const u_char *packet,
 //    if (tcp->th_off > 5) {
 
         tcp_option_t *_opt = (tcp_option_t *) opt;
-        if (_opt->size == 0) {
-            printf("zaaaaaa\n");
-        }
+        printf("_opt->size %d\n", _opt->size );
         while (*opt != 0) {
             tcp_option_t *_opt = (tcp_option_t *) opt;
 
