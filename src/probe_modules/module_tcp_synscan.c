@@ -221,6 +221,11 @@ void synscan_process_packet(const u_char *packet,
             if (_opt->size == 0) {
                 break;
             }
+
+            if(*opt != 0){
+
+            }
+
         }
 //    }
 
