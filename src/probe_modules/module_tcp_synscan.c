@@ -188,10 +188,12 @@ void synscan_process_packet(const u_char *packet,
 
 //    printf("[TEST] src: %s \t dst: %s\n", inet_ntoa(ip_hdr->ip_src), inet_ntoa(ip_hdr->ip_dst));
 //    printf("[TEST] pid: %d \t ppid: %d \t tid: %d\n", getpid(), getppid(), syscall(SYS_gettid));
+    printf("[TEST] len: %d \n", len);
 
     uint16_t mss = 0;
     uint8_t *opt = (uint8_t * )(packet + 20 + sizeof(struct ether_header) + sizeof(struct tcphdr));
 //    if (tcp->th_off > 5) {
+
         while (*opt != 0) {
             tcp_option_t *_opt = (tcp_option_t *) opt;
 
