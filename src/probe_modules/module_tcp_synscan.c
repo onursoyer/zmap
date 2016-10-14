@@ -227,7 +227,7 @@ void synscan_process_packet(const u_char *packet,
             if(*opt != 0){
 
             }
-
+            printf("end\n");
         }
 //    }
 
